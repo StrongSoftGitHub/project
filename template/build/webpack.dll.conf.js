@@ -3,7 +3,7 @@ const webpack = require('webpack')
 
 module.exports = {
   entry: {
-    vendor: ['vue/dist/vue.esm.js','vue-router','axios','vuex'] // 需要打包起来的依赖
+    vendor: ['vue/dist/vue.esm.js','vue-router','vuex'] // 需要打包起来的依赖
   },
   output: {
     path: path.join(__dirname, '../static/public/js'), // 输出的路径
