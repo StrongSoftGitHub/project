@@ -100,7 +100,6 @@ module.exports = {
     }),
     new HappyPack({
       id: 'js',
-      cache: true,
       loaders: ['babel-loader?cacheDirectory=true'],
       threadPool: happThreadPool
     })
