@@ -77,7 +77,7 @@ exports.printMessage = function printMessage(data, { green, yellow }) {
 常用命令:
 
   ${yellow(
-    `${installMsg(data)}${lintMsg(data)}${lintFixMsg(data)}${buildMsg(data)}启动本地服务器：npm run dev`
+    `${installMsg(data)}${lintMsg(data)}启动本地服务器：npm run dev`
   )}
   
 `
@@ -110,21 +110,21 @@ function lintMsg(data) {
  * containing the instruction for this step.
  * @param {Object} data Data from questionnaire.
  */
-function lintFixMsg(data) {
-    return !data.autoInstall &&
-        data.lint ?
-        '自动修复代码规范问题：npm run fix \n  ' :
-        ''
-}
+// function lintFixMsg(data) {
+//     return !data.autoInstall &&
+//         data.lint ?
+//         '自动修复代码规范问题：npm run fix \n  ' :
+//         ''
+// }
 
 /**
  * If the user will have to run fix themselves, it returns a string
  * containing the instruction for this step.
  * @param {Object} data Data from questionnaire.
  */
-function buildMsg(data) {
-    return '编译： npm run build \n  '
-}
+// function buildMsg(data) {
+//     return '编译： npm run build \n  '
+// }
 
 /**
  * Spawns a child process and runs the specified command
