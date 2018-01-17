@@ -34,7 +34,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'string',
       required: true,
-      message: '项目名称（合同号+项目名称+Cli，如综合信息平台：2017386-Integrated-Information-Platform-Cli）',
+      message: '项目名称（合同号+项目名称+cli，如综合信息平台：2017386-integrated-information-platform-cli）',
     },
     description: {
       when: 'isNotTest',
@@ -57,6 +57,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: '是否需要安装单元测试？',
+      default: false
     },
     runner: {
       when: 'isNotTest && unit',
@@ -84,6 +85,7 @@ module.exports = {
       when: 'isNotTest',
       type: 'confirm',
       message: '是否使用Nightwatch来进行饿e2e（端对端）测试？',
+      default: false
     },
     autoInstall: {
       when: 'isNotTest',
