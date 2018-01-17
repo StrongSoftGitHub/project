@@ -10,14 +10,14 @@ const lintStyles = ['standard', 'airbnb']
  * @param {object} data Data from questionnaire
  */
 exports.sortDependencies = function sortDependencies(data) {
-  const packageJsonFile = path.join(
-    data.inPlace ? '' : data.destDirName,
-    'package.json'
-  )
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonFile))
-  packageJson.devDependencies = sortObject(packageJson.devDependencies)
-  packageJson.dependencies = sortObject(packageJson.dependencies)
-  fs.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2) + '\n')
+    const packageJsonFile = path.join(
+        data.inPlace ? '' : data.destDirName,
+        'package.json'
+    )
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonFile))
+    packageJson.devDependencies = sortObject(packageJson.devDependencies)
+    packageJson.dependencies = sortObject(packageJson.dependencies)
+    fs.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2) + '\n')
 }
 
 /**
@@ -26,15 +26,15 @@ exports.sortDependencies = function sortDependencies(data) {
  * @param {object} data Data from questionnaire
  */
 exports.installDependencies = function installDependencies(
-  cwd,
-  executable = 'npm',
-  color
-) {
-  console.log(`\n\n# ${color('正在安装项目依赖...')}`)
-  console.log('# ========================\n')
-  return runCommand(executable, ['install'], {
     cwd,
-  })
+    executable = 'npm',
+    color
+) {
+    console.log(`\n\n# ${color('正在安装项目依赖...')}`)
+    console.log('# ========================\n')
+    return runCommand(executable, ['install'], {
+        cwd,
+    })
 }
 
 /**
@@ -43,16 +43,16 @@ exports.installDependencies = function installDependencies(
  * @param {object} data Data from questionnaire
  */
 exports.runLintFix = function runLintFix(cwd, data, color) {
-  if (data.lint) {
-    const args =
-      data.autoInstall === 'npm'
-        ? ['run', 'lint', '--', '--fix']
-        : ['run', 'lint', '--fix']
-    return runCommand(data.autoInstall, args, {
-      cwd,
-    })
-  }
-  return Promise.resolve()
+    if (data.lint) {
+        const args =
+            data.autoInstall === 'npm' ?
+            ['run', 'lint', '--', '--fix'] :
+            ['run', 'lint', '--fix']
+        return runCommand(data.autoInstall, args, {
+            cwd,
+        })
+    }
+    return Promise.resolve()
 }
 
 /**
@@ -60,7 +60,7 @@ exports.runLintFix = function runLintFix(cwd, data, color) {
  * @param {Object} data Data from questionnaire.
  */
 exports.printMessage = function printMessage(data, { green, yellow }) {
-  const message = `
+    const message = `
 # ${green('项目依赖安装完成!')}
 # ========================
 
@@ -73,7 +73,7 @@ To get started:
   )}
   
 `
-  console.log(message)
+    console.log(message)
 }
 
 /**
@@ -82,10 +82,10 @@ To get started:
  * @param {Object} data Data from questionnaire.
  */
 function lintMsg(data) {
-  return !data.autoInstall &&
-    data.lint
-    ? 'npm run lint -- --fix \n  '
-    : ''
+    return !data.autoInstall &&
+        data.lint ?
+        'npm run lint -- --fix \n  ' :
+        ''
 }
 
 /**
@@ -94,7 +94,7 @@ function lintMsg(data) {
  * @param {Object} data Data from the questionnaire
  */
 function installMsg(data) {
-  return !data.autoInstall ? 'npm install \n  ' : ''
+    return !data.autoInstall ? 'npm install \n  ' : ''
 }
 
 /**
@@ -106,33 +106,32 @@ function installMsg(data) {
  * @param {object} options
  */
 function runCommand(cmd, args, options) {
-  return new Promise((resolve, reject) => {
-    const spwan = spawn(
-      cmd,
-      args,
-      Object.assign(
-        {
-          cwd: process.cwd(),
-          stdio: 'inherit',
-          shell: true,
-        },
-        options
-      )
-    )
+    return new Promise((resolve, reject) => {
+        const spwan = spawn(
+            cmd,
+            args,
+            Object.assign({
+                    cwd: process.cwd(),
+                    stdio: 'inherit',
+                    shell: true,
+                },
+                options
+            )
+        )
 
-    spwan.on('exit', () => {
-      resolve()
+        spwan.on('exit', () => {
+            resolve()
+        })
     })
-  })
 }
 
 function sortObject(object) {
-  // Based on https://github.com/yarnpkg/yarn/blob/v1.3.2/src/config.js#L79-L85
-  const sortedObject = {}
-  Object.keys(object)
-    .sort()
-    .forEach(item => {
-      sortedObject[item] = object[item]
-    })
-  return sortedObject
+    // Based on https://github.com/yarnpkg/yarn/blob/v1.3.2/src/config.js#L79-L85
+    const sortedObject = {}
+    Object.keys(object)
+        .sort()
+        .forEach(item => {
+            sortedObject[item] = object[item]
+        })
+    return sortedObject
 }
