@@ -84,7 +84,7 @@ module.exports = {
     e2e: {
       when: 'isNotTest',
       type: 'confirm',
-      message: '是否使用Nightwatch来进行饿e2e（端对端）测试？',
+      message: '是否使用Nightwatch来进行e2e（端对端）测试？',
       default: false
     },
     autoInstall: {

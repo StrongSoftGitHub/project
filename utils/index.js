@@ -30,7 +30,7 @@ exports.installDependencies = function installDependencies(
   executable = 'npm',
   color
 ) {
-  console.log(`\n\n# ${color('Installing project dependencies ...')}`)
+  console.log(`\n\n# ${color('正在安装项目依赖...')}`)
   console.log('# ========================\n')
   return runCommand(executable, ['install'], {
     cwd,
@@ -44,12 +44,6 @@ exports.installDependencies = function installDependencies(
  */
 exports.runLintFix = function runLintFix(cwd, data, color) {
   if (data.lint) {
-    console.log(
-      `\n\n${color(
-        'Running eslint --fix to comply with chosen preset rules...'
-      )}`
-    )
-    console.log('# ========================\n')
     const args =
       data.autoInstall === 'npm'
         ? ['run', 'lint', '--', '--fix']
@@ -67,7 +61,7 @@ exports.runLintFix = function runLintFix(cwd, data, color) {
  */
 exports.printMessage = function printMessage(data, { green, yellow }) {
   const message = `
-# ${green('Project initialization finished!')}
+# ${green('项目依赖安装完成!')}
 # ========================
 
 To get started:
@@ -78,7 +72,6 @@ To get started:
     )}${lintMsg(data)}npm run dev`
   )}
   
-Documentation can be found at https://vuejs-templates.github.io/webpack
 `
   console.log(message)
 }

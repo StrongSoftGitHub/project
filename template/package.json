@@ -22,6 +22,7 @@
     "lint": "eslint --ext .js,.vue src{{#unit}} test/unit{{/unit}}{{#e2e}} test/e2e/specs{{/e2e}}",
     "fix": "eslint --fix --ext .js,.vue src",
     {{/lint}}
+    "report": "npm run build --report",
     "build": "node build/build.js",
     "build:dll": "webpack --config ./build/webpack.dll.conf.js"
   },
