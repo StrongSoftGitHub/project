@@ -10,14 +10,14 @@ const lintStyles = ['standard', 'airbnb']
  * @param {object} data Data from questionnaire
  */
 exports.sortDependencies = function sortDependencies(data) {
-  const packageJsonFile = path.join(
-    data.inPlace ? '' : data.destDirName,
-    'package.json'
-  )
-  const packageJson = JSON.parse(fs.readFileSync(packageJsonFile))
-  packageJson.devDependencies = sortObject(packageJson.devDependencies)
-  packageJson.dependencies = sortObject(packageJson.dependencies)
-  fs.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2) + '\n')
+    const packageJsonFile = path.join(
+        data.inPlace ? '' : data.destDirName,
+        'package.json'
+    )
+    const packageJson = JSON.parse(fs.readFileSync(packageJsonFile))
+    packageJson.devDependencies = sortObject(packageJson.devDependencies)
+    packageJson.dependencies = sortObject(packageJson.dependencies)
+    fs.writeFileSync(packageJsonFile, JSON.stringify(packageJson, null, 2) + '\n')
 }
 
 /**
@@ -26,15 +26,15 @@ exports.sortDependencies = function sortDependencies(data) {
  * @param {object} data Data from questionnaire
  */
 exports.installDependencies = function installDependencies(
-  cwd,
-  executable = 'npm',
-  color
-) {
-  console.log(`\n\n# ${color('Installing project dependencies ...')}`)
-  console.log('# ========================\n')
-  return runCommand(executable, ['install'], {
     cwd,
-  })
+    executable = 'npm',
+    color
+) {
+    console.log(`\n\n# ${color('正在安装项目依赖...')}`)
+    console.log('# ========================\n')
+    return runCommand(executable, ['install'], {
+        cwd,
+    })
 }
 
 /**
@@ -43,22 +43,26 @@ exports.installDependencies = function installDependencies(
  * @param {object} data Data from questionnaire
  */
 exports.runLintFix = function runLintFix(cwd, data, color) {
-  if (data.lint && lintStyles.indexOf(data.lintConfig) !== -1) {
-    console.log(
-      `\n\n${color(
-        'Running eslint --fix to comply with chosen preset rules...'
-      )}`
-    )
-    console.log('# ========================\n')
-    const args =
-      data.autoInstall === 'npm'
-        ? ['run', 'lint', '--', '--fix']
-        : ['run', 'lint', '--fix']
+    if (data.lint) {
+        const args =
+            data.autoInstall === 'npm' ? ['run', 'lint', '--', '--fix'] : ['run', 'lint', '--fix']
+        return runCommand(data.autoInstall, args, {
+            cwd,
+        })
+    }
+    return Promise.resolve()
+}
+
+/**
+ * Runs `npm run dev` in the project directory
+ * @param {string} cwd Path of the created project directory
+ * @param {object} data Data from questionnaire
+ */
+exports.runDev = function runLintFix(cwd, data, color) {
+    const args = ['run', 'dev']
     return runCommand(data.autoInstall, args, {
-      cwd,
+        cwd,
     })
-  }
-  return Promise.resolve()
 }
 
 /**
@@ -66,32 +70,18 @@ exports.runLintFix = function runLintFix(cwd, data, color) {
  * @param {Object} data Data from questionnaire.
  */
 exports.printMessage = function printMessage(data, { green, yellow }) {
-  const message = `
-# ${green('Project initialization finished!')}
+    const message = `
+# ${green(data.autoInstall?'项目依赖安装完成!':'')}
 # ========================
-To get started:
+
+常用命令:
+
   ${yellow(
-    `${data.inPlace ? '' : `cd ${data.destDirName}\n  `}${installMsg(
-      data
-    )}${lintMsg(data)}npm run dev`
+    `${installMsg(data)}${lintMsg(data)}${lintFixMsg(data)}${buildMsg(data)}启动本地服务器：npm run dev`
   )}
   
-Documentation can be found at https://vuejs-templates.github.io/webpack
 `
-  console.log(message)
-}
-
-/**
- * If the user will have to run lint --fix themselves, it returns a string
- * containing the instruction for this step.
- * @param {Object} data Data from questionnaire.
- */
-function lintMsg(data) {
-  return !data.autoInstall &&
-    data.lint &&
-    lintStyles.indexOf(data.lintConfig) !== -1
-    ? 'npm run lint -- --fix (or for yarn: yarn run lint --fix)\n  '
-    : ''
+    console.log(message)
 }
 
 /**
@@ -100,7 +90,34 @@ function lintMsg(data) {
  * @param {Object} data Data from the questionnaire
  */
 function installMsg(data) {
-  return !data.autoInstall ? 'npm install (or if using yarn: yarn)\n  ' : ''
+    return !data.autoInstall ? '安装依赖：npm install \n  ':''
+}
+
+/**
+ * If the user will have to run lint themselves, it returns a string
+ * containing the instruction for this step.
+ * @param {Object} data Data from questionnaire.
+ */
+function lintMsg(data) {
+    return !data.autoInstall &&data.lint ?'代码规范检测：npm run lint \n  ':''
+}
+
+/**
+ * If the user will have to run fix themselves, it returns a string
+ * containing the instruction for this step.
+ * @param {Object} data Data from questionnaire.
+ */
+function lintFixMsg(data) {
+    return !data.autoInstall && data.lint ?'自动修复代码规范问题：npm run fix \n  ':''
+}
+
+/**
+ * If the user will have to run fix themselves, it returns a string
+ * containing the instruction for this step.
+ * @param {Object} data Data from questionnaire.
+ */
+function buildMsg(data) {
+    return '编译： npm run build \n  '
 }
 
 /**
@@ -112,33 +129,32 @@ function installMsg(data) {
  * @param {object} options
  */
 function runCommand(cmd, args, options) {
-  return new Promise((resolve, reject) => {
-    const spwan = spawn(
-      cmd,
-      args,
-      Object.assign(
-        {
-          cwd: process.cwd(),
-          stdio: 'inherit',
-          shell: true,
-        },
-        options
-      )
-    )
+    return new Promise((resolve, reject) => {
+        const spwan = spawn(
+            cmd,
+            args,
+            Object.assign({
+                    cwd: process.cwd(),
+                    stdio: 'inherit',
+                    shell: true,
+                },
+                options
+            )
+        )
 
-    spwan.on('exit', () => {
-      resolve()
+        spwan.on('exit', () => {
+            resolve()
+        })
     })
-  })
 }
 
 function sortObject(object) {
-  // Based on https://github.com/yarnpkg/yarn/blob/v1.3.2/src/config.js#L79-L85
-  const sortedObject = {}
-  Object.keys(object)
-    .sort()
-    .forEach(item => {
-      sortedObject[item] = object[item]
-    })
-  return sortedObject
+    // Based on https://github.com/yarnpkg/yarn/blob/v1.3.2/src/config.js#L79-L85
+    const sortedObject = {}
+    Object.keys(object)
+        .sort()
+        .forEach(item => {
+            sortedObject[item] = object[item]
+        })
+    return sortedObject
 }
