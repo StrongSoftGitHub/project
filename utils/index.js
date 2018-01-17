@@ -84,7 +84,7 @@ To get started:
 function lintMsg(data) {
   return !data.autoInstall &&
     data.lint
-    ? 'npm run lint -- --fix (or for yarn: yarn run lint --fix)\n  '
+    ? 'npm run lint -- --fix \n  '
     : ''
 }
 
@@ -94,7 +94,7 @@ function lintMsg(data) {
  * @param {Object} data Data from the questionnaire
  */
 function installMsg(data) {
-  return !data.autoInstall ? 'npm install (or if using yarn: yarn)\n  ' : ''
+  return !data.autoInstall ? 'npm install \n  ' : ''
 }
 
 /**
