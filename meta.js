@@ -20,96 +20,48 @@ module.exports = {
   },
   helpers: {
     if_or(v1, v2, options) {
-
       if (v1 || v2) {
         return options.fn(this)
       }
-
       return options.inverse(this)
     },
     template_version() {
       return templateVersion
     },
   },
-  
   prompts: {
     name: {
       when: 'isNotTest',
       type: 'string',
       required: true,
-      message: 'Project name',
+      message: '项目名称（合同号+项目名称+Cli，如综合信息平台：2017386-Integrated-Information-Platform-Cli）',
     },
     description: {
       when: 'isNotTest',
       type: 'string',
       required: false,
-      message: 'Project description',
-      default: 'A Vue.js project',
+      message: '项目简要概述',
+      default: '一个Vue项目。'
     },
     author: {
       when: 'isNotTest',
       type: 'string',
-      message: 'Author',
-    },
-    build: {
-      when: 'isNotTest',
-      type: 'list',
-      message: 'Vue build',
-      choices: [
-        {
-          name: 'Runtime + Compiler: recommended for most users',
-          value: 'standalone',
-          short: 'standalone',
-        },
-        {
-          name:
-            'Runtime-only: about 6KB lighter min+gzip, but templates (or any Vue-specific HTML) are ONLY allowed in .vue files - render functions are required elsewhere',
-          value: 'runtime',
-          short: 'runtime',
-        },
-      ],
-    },
-    router: {
-      when: 'isNotTest',
-      type: 'confirm',
-      message: 'Install vue-router?',
+      message: '作者',
     },
     lint: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Use ESLint to lint your code?',
-    },
-    lintConfig: {
-      when: 'isNotTest && lint',
-      type: 'list',
-      message: 'Pick an ESLint preset',
-      choices: [
-        {
-          name: 'Standard (https://github.com/standard/standard)',
-          value: 'standard',
-          short: 'Standard',
-        },
-        {
-          name: 'Airbnb (https://github.com/airbnb/javascript)',
-          value: 'airbnb',
-          short: 'Airbnb',
-        },
-        {
-          name: 'none (configure it yourself)',
-          value: 'none',
-          short: 'none',
-        },
-      ],
+      message: '是否使用ESLint规范您的代码?',
     },
     unit: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Set up unit tests',
+      message: '是否需要安装单元测试？',
     },
     runner: {
       when: 'isNotTest && unit',
       type: 'list',
-      message: 'Pick a test runner',
+      message: '选择一个测试运行器',
       choices: [
         {
           name: 'Jest',
@@ -122,7 +74,7 @@ module.exports = {
           short: 'karma',
         },
         {
-          name: 'none (configure it yourself)',
+          name: 'none (自定义)',
           value: 'noTest',
           short: 'noTest',
         },
@@ -131,31 +83,26 @@ module.exports = {
     e2e: {
       when: 'isNotTest',
       type: 'confirm',
-      message: 'Setup e2e tests with Nightwatch?',
+      message: '是否使用Nightwatch来进行饿e2e（端对端）测试？',
     },
     autoInstall: {
       when: 'isNotTest',
       type: 'list',
       message:
-        'Should we run `npm install` for you after the project has been created? (recommended)',
+        '在项目生成之后，是否需要自动安装依赖？',
       choices: [
         {
-          name: 'Yes, use NPM',
+          name: '是的',
           value: 'npm',
           short: 'npm',
         },
         {
-          name: 'Yes, use Yarn',
-          value: 'yarn',
-          short: 'yarn',
-        },
-        {
-          name: 'No, I will handle that myself',
+          name: '不，我要自己安装',
           value: false,
           short: 'no',
-        },
+        }
       ],
-    },
+    }
   },
   filters: {
     '.eslintrc.js': 'lint',

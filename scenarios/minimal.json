@@ -4,7 +4,7 @@
   "description": "Testing the minimal template setup",
   "author": "CircleCI",
   "build": "standalone",
-  "router": false,
+  "router": true,
   "lint": false,
   "lintConfig": "standard",
   "unit": false,

@@ -43,7 +43,7 @@ exports.installDependencies = function installDependencies(
  * @param {object} data Data from questionnaire
  */
 exports.runLintFix = function runLintFix(cwd, data, color) {
-  if (data.lint && lintStyles.indexOf(data.lintConfig) !== -1) {
+  if (data.lint) {
     console.log(
       `\n\n${color(
         'Running eslint --fix to comply with chosen preset rules...'
@@ -90,8 +90,7 @@ Documentation can be found at https://vuejs-templates.github.io/webpack
  */
 function lintMsg(data) {
   return !data.autoInstall &&
-    data.lint &&
-    lintStyles.indexOf(data.lintConfig) !== -1
+    data.lint
     ? 'npm run lint -- --fix (or for yarn: yarn run lint --fix)\n  '
     : ''
 }
