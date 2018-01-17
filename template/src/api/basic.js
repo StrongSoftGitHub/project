@@ -7,7 +7,7 @@ module.exports = [{
   method: 'data',
   url: '/api/v2/basic/data',
   type: 'get'
-},{
+}, {
   name: '获取配置文件',
   method: 'config',
   url: '/api/v2/basic/config',

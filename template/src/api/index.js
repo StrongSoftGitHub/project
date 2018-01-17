@@ -4,7 +4,7 @@
  * 一级属性中的方法：当前模块需要用的接口
  * @type {Object}
  */
-export default  [{
+export default [{
   module: 'basic',
   name: '通用接口',
   list: require('./basic')

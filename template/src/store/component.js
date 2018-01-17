@@ -3,8 +3,8 @@ export default {
   namespaced: true,
   state: {
     asyncComponents: {
-    	"vue-iframe": () =>
-        import ('@strongsoft/vue-iframe')
+      'vue-iframe': () =>
+        import('@strongsoft/vue-iframe')
     }
   }
 }
