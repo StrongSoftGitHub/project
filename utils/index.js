@@ -45,9 +45,7 @@ exports.installDependencies = function installDependencies(
 exports.runLintFix = function runLintFix(cwd, data, color) {
     if (data.lint) {
         const args =
-            data.autoInstall === 'npm' ?
-            ['run', 'lint', '--', '--fix'] :
-            ['run', 'lint', '--fix']
+            data.autoInstall === 'npm' ? ['run', 'lint', '--', '--fix'] : ['run', 'lint', '--fix']
         return runCommand(data.autoInstall, args, {
             cwd,
         })
@@ -56,36 +54,34 @@ exports.runLintFix = function runLintFix(cwd, data, color) {
 }
 
 /**
+ * Runs `npm run dev` in the project directory
+ * @param {string} cwd Path of the created project directory
+ * @param {object} data Data from questionnaire
+ */
+exports.runDev = function runLintFix(cwd, data, color) {
+    const args = ['run', 'dev']
+    return runCommand(data.autoInstall, args, {
+        cwd,
+    })
+}
+
+/**
  * Prints the final message with instructions of necessary next steps.
  * @param {Object} data Data from questionnaire.
  */
 exports.printMessage = function printMessage(data, { green, yellow }) {
     const message = `
-# ${green('项目依赖安装完成!')}
+# ${green(data.autoInstall?:'项目依赖安装完成!':'')}
 # ========================
 
-To get started:
+常用命令:
 
   ${yellow(
-    `${data.inPlace ? '' : `cd ${data.destDirName}\n  `}${installMsg(
-      data
-    )}${lintMsg(data)}npm run dev`
+    `${installMsg(data)}${lintMsg(data)}${lintFixMsg(data)}${buildMsg(data)}启动本地服务器：npm run dev`
   )}
   
 `
     console.log(message)
-}
-
-/**
- * If the user will have to run lint --fix themselves, it returns a string
- * containing the instruction for this step.
- * @param {Object} data Data from questionnaire.
- */
-function lintMsg(data) {
-    return !data.autoInstall &&
-        data.lint ?
-        'npm run lint -- --fix \n  ' :
-        ''
 }
 
 /**
@@ -94,7 +90,40 @@ function lintMsg(data) {
  * @param {Object} data Data from the questionnaire
  */
 function installMsg(data) {
-    return !data.autoInstall ? 'npm install \n  ' : ''
+    return !data.autoInstall ? '安装依赖：npm install \n  ' : ''
+}
+
+/**
+ * If the user will have to run lint themselves, it returns a string
+ * containing the instruction for this step.
+ * @param {Object} data Data from questionnaire.
+ */
+function lintMsg(data) {
+    return !data.autoInstall &&
+        data.lint ?
+        '代码规范检测：npm run lint \n  ' :
+        ''
+}
+
+/**
+ * If the user will have to run fix themselves, it returns a string
+ * containing the instruction for this step.
+ * @param {Object} data Data from questionnaire.
+ */
+function lintFixMsg(data) {
+    return !data.autoInstall &&
+        data.lint ?
+        '自动修复代码规范问题：npm run fix \n  ' :
+        ''
+}
+
+/**
+ * If the user will have to run fix themselves, it returns a string
+ * containing the instruction for this step.
+ * @param {Object} data Data from questionnaire.
+ */
+function buildMsg(data) {
+    return '编译： npm run build \n  '
 }
 
 /**

@@ -5,6 +5,7 @@ const {
   sortDependencies,
   installDependencies,
   runLintFix,
+  runDev,
   printMessage,
 } = require('./utils')
 const pkg = require('./package.json')
@@ -96,12 +97,12 @@ module.exports = {
         {
           name: '是的',
           value: 'npm',
-          short: 'npm',
+          short: 'Yes',
         },
         {
           name: '不，我要自己安装',
           value: false,
-          short: 'no',
+          short: 'No',
         }
       ],
     }
@@ -132,6 +133,9 @@ module.exports = {
           return runLintFix(cwd, data, green)
         })
         .then(() => {
+          return runDev(cwd, data, green)
+        })
+        .then(()=>{
           printMessage(data, green)
         })
         .catch(e => {
