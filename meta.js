@@ -126,7 +126,7 @@ module.exports = {
 
         fs.readFile("./utils/navigation.vue", 'utf-8', function(err, data) {
             if (err) {
-                console.log("error")
+                console.log(JSON.stringify(err))
             } else {
                 const file = path.join(
                     data.inPlace ? '' : data.destDirName,
