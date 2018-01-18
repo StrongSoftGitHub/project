@@ -124,7 +124,7 @@ module.exports = {
 
         const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
 
-        rf.readFile("./utils/navigation.vue", 'utf-8', function(err, data) {
+        fs.readFile("./utils/navigation.vue", 'utf-8', function(err, data) {
             if (err) {
                 console.log("error")
             } else {
