@@ -124,6 +124,20 @@ module.exports = {
 
         const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
 
+        rf.readFile("./utils/navigation.vue", 'utf-8', function(err, data) {
+            if (err) {
+                console.log("error")
+            } else {
+                const file = path.join(
+                    data.inPlace ? '' : data.destDirName,
+                    'src', 'components', 'navigation.vue'
+                )
+                fs.writeFile(file, data, err => {
+                    if (err) throw err
+                })
+            }
+        })
+
         if (data.autoInstall) {
             installDependencies(cwd, data.autoInstall, green)
                 .then(() => {
