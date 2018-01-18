@@ -28,6 +28,18 @@ module.exports = {
             }
             return options.inverse(this)
         },
+        if_equal(v1, v2, options) {
+            if (v1 === v2) {
+                return options.fn(this)
+            }
+            return options.inverse(this)
+        },
+        if_notequal(v1, v2, options) {
+            if (v1 !== v2) {
+                return options.fn(this)
+            }
+            return options.inverse(this)
+        },
         template_version() {
             return templateVersion
         },
@@ -88,6 +100,12 @@ module.exports = {
             type: 'confirm',
             message: '是否使用Nightwatch来进行e2e（端对端）测试？',
             default: false
+        },
+        api:{
+            when: 'isNotTest',
+            type: 'string',
+            message: 'API接口地址（如：http://47.95.14.230:9174，默认：localhost）',
+            default:'localhost'
         },
         autoInstall: {
             when: 'isNotTest',
@@ -154,6 +172,9 @@ module.exports = {
         })
 
         if (data.autoInstall) {
+
+            console.log(chalk.yellow('Message:'), '安装过程大概需要4~5分钟，请耐心等候...')
+
             installDependencies(cwd, data.autoInstall, green)
                 .then(() => {
                     return runLintFix(cwd, data, green)
@@ -170,5 +191,5 @@ module.exports = {
         } else {
             printMessage(data, chalk)
         }
-    },
+    }
 }

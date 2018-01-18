@@ -11,9 +11,20 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-        // '/api/**': {
-        //     target: 'http://47.95.14.230:9174/'
-        // }
+        {{#if_notequal api 'localhost'}}
+        '/api/**': {
+            target: '{{api}}'
+        },
+        '/extend/**': {
+            target: '{{api}}'
+        },
+        '/master/**': {
+            target: '{{api}}'
+        },
+        '/web/html/**': {
+            target: '{{api}}'
+        }
+        {{/if_notequal}}
     },
 
     // Various Dev Server settings

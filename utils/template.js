@@ -351,18 +351,6 @@ export default {
         }
       }
     }
-    .xqjc-menu {
-      margin-top: 10px;
-      height: 164px;
-      width: 224px;
-      box-sizing: border-box;
-    }
-    .xqjc-menu.active-img-menu {
-      border: 2px solid #259cf0;
-    }
-    .xqjc-menu:hover {
-      border: 2px solid #259cf0;
-    }
   }
 }
 
