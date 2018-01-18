@@ -30,7 +30,7 @@ exports.installDependencies = function installDependencies(
     executable = 'npm',
     color
 ) {
-    console.log(`\n\n# ${color('正在安装项目依赖...')}`)
+    console.log(`\n\n# ${color('正在安装项目依赖，安装过程大概需要4~5分钟，请耐心等候...')}`)
     console.log('# ========================\n')
     return runCommand(executable, ['install'], {
         cwd,
