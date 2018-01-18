@@ -75,7 +75,7 @@ module.exports = {
             default: false
         },
         runner: {
-            when: 'isNotTest && unit',
+            when: 'isNotTest && !name && unit',
             type: 'list',
             message: '选择一个测试运行器',
             choices: [{
