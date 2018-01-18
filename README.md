@@ -1,66 +1,86 @@
-# vue-webpack-boilerplate
+# project-cli
 
-> A full-featured Webpack setup with hot-reload, lint-on-save, unit testing & css extraction.
+> 基于webpack模板改造，一个适合开发组件和插件的精简脚手架。
 
-> This template is Vue 2.0 compatible. For Vue 1.x use this command: `vue init webpack#1.0 my-project`
+### 功能
 
-## Documentation
+1. 提供组件和插件的开发模板
+2. 内置Eslint代码规范检测
+3. 已设置好发布成npm包的配置
+4. 支持热刷新
+5. 代码错误检测
 
-- [For this template](http://vuejs-templates.github.io/webpack): common questions specific to this template are answered and each part is described in greater detail
-- [For Vue 2.0](http://vuejs.org/guide/): general information about how to work with Vue, not specific to this template
+### 使用
 
-## Usage
-
-This is a project template for [vue-cli](https://github.com/vuejs/vue-cli). **It is recommended to use npm 3+ for a more efficient dependency tree.**
-
-``` bash
-$ npm install -g vue-cli
-$ vue init webpack my-project
-$ cd my-project
-$ npm install
-$ npm run dev
-```
-
-This will scaffold the project using the `master` branch. If you wish to use the latest version of the webpack template, do the following instead:
+如果还没安装过vue-cli，请执行：
 
 ``` bash
-$ vue init webpack#develop my-project
+npm install -g vue-cli
 ```
 
-:warning: **The develop branch is not considered stable and can contain bugs or not build at all, so use at your own risk.**
-
-The development server will run on port 8080 by default. If that port is already in use on your machine, the next free port will be used.
-
-## What's Included
-
-- `npm run dev`: first-in-class development experience.
-  - Webpack + `vue-loader` for single file Vue components.
-  - State preserving hot-reload
-  - State preserving compilation error overlay
-  - Lint-on-save with ESLint
-  - Source maps
-
-- `npm run build`: Production ready build.
-  - JavaScript minified with [UglifyJS v3](https://github.com/mishoo/UglifyJS2/tree/harmony).
-  - HTML minified with [html-minifier](https://github.com/kangax/html-minifier).
-  - CSS across all components extracted into a single file and minified with [cssnano](https://github.com/ben-eb/cssnano).
-  - Static assets compiled with version hashes for efficient long-term caching, and an auto-generated production `index.html` with proper URLs to these generated assets.
-  - Use `npm run build --report`to build with bundle size analytics.
-
-- `npm run unit`: Unit tests run in [JSDOM](https://github.com/tmpvar/jsdom) with [Jest](https://facebook.github.io/jest/), or in PhantomJS with Karma + Mocha + karma-webpack.
-  - Supports ES2015+ in test files.
-  - Easy mocking.
-
-- `npm run e2e`: End-to-end tests with [Nightwatch](http://nightwatchjs.org/).
-  - Run tests in multiple browsers in parallel.
-  - Works with one command out of the box:
-    - Selenium and chromedriver dependencies automatically handled.
-    - Automatically spawns the Selenium server.
-
-### Fork It And Make Your Own
-
-You can fork this repo to create your own boilerplate, and use it with `vue-cli`:
-
+初始化开发脚手架：
 ``` bash
-vue init username/repo my-project
+vue init StrongSoftGitHub/simple-cli vue-component[或插件名称]
 ```
+
+### 开发步骤
+
+1. `vue init StrongSoftGitHub/simple-cli vue-component`，初始化开发脚手架， my-component即组件名称或者插件名称（*适用范围选项，选择通用会以@strongsoft作为前缀，选择项目，则会以@端口号作为前缀*）
+2. 开发好完成后，统一在src/lib/index.js文件中导出
+3. 在src/App.vue中编写示例
+4. 编写README.md（重要）
+3. `npm publish`，发布到npm包源
+
+### 代理设置
+
+在webpack.config.js文件中设置，如：
+```js
+devServer: {
+  proxy: {
+      '/api/**': {
+        target: 'http://47.95.14.230:9174',
+        secure: false
+      }
+  }
+}
+```
+
+### 组件安装使用
+
+1. 安装
+   - 通用组件：`npm install @strongsoft/my-component --save`
+   - 项目组件：`npm install @端口号/my-component --save`
+2. 使用
+   - 通用组件：`import MyComponent from '@strongsoft/my-component'`
+   - 项目组件：`import MyComponent from '@端口号/my-component'`
+
+### 插件安装使用
+
+1. 安装
+   - 通用插件：`npm install @strongsoft/my-plugin --save`
+   - 项目插件：`npm install @端口号/my-plugin --save`
+2. 使用
+   - 通用插件：
+     ```
+     import Vue from 'vue'
+     import MyPlugin from '@strongsoft/my-plugin'
+     Vue.use(MyPlugin)
+     //或者传入参数对象
+     Vue.use(MyPlugin,{})
+     ```
+   - 项目插件：
+     ```
+     import Vue from 'vue'
+     import MyPlugin from '@端口号/my-plugin'`
+     Vue.use(MyPlugin)
+     //或者传入参数对象
+     Vue.use(MyPlugin,{})
+     ```
+
+### 常用命令
+
+- 安装依赖：npm install
+- 启动本地服务器：npm run dev
+- 代码规范检测：npm run lint
+- 自动修复代码规范问题：npm run fix
+- 发布成npm包：npm publish

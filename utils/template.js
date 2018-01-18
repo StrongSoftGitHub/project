@@ -359,30 +359,32 @@ export default {
 "PCLogin":`<template>
   <el-row style="margin-top: 10%">
     <el-col :span="8" :offset="8">
-      <el-card style="width: 450px;margin:0 auto">
-        <el-form label-position="right" :rules="rules" label-width="70px" :model="userInfo" ref="loginForm">
-          <el-form-item prop="username" label="用户名">
-            <el-input v-model.trim="userInfo.username" placeholder="用户名" auto-complete="off" @keyup.enter.native="onSubmit"></el-input>
-          </el-form-item>
-          <el-form-item prop="password" label="密码">
-            <el-input type="password" v-model.trim="userInfo.password" auto-complete="off" placeholder="密码" @keyup.enter.native="onSubmit"></el-input>
-          </el-form-item>
-          <el-form-item v-if="enableValidCode" prop="validCode" label="验证码">
-            <el-col :span="16">
-              <el-input v-model.trim="userInfo.validCode" placeholder="验证码"></el-input>
-            </el-col>
-            <el-col :span="8">
-              <img @click="getValidCode" ref="validCodeImg" style="height:100%;" :src="validCodeUrl" />
-            </el-col>
-          </el-form-item>
-          <el-form-item>
-            <el-checkbox v-model="remember" label="记住密码"></el-checkbox>
-          </el-form-item>
-          <el-form-item>
-            <el-button style="width:100%;" type="primary" @click="onSubmit" :loading="loading">登录</el-button>
-          </el-form-item>
-        </el-form>
-      </el-card>
+      <transition appear enter-active-class="animated bounceInDown" leave-active-class="animated bounceOutUp">
+        <el-card style="width: 450px;margin:0 auto">
+          <el-form label-position="right" :rules="rules" label-width="70px" :model="userInfo" ref="loginForm">
+            <el-form-item prop="username" label="用户名">
+              <el-input v-model.trim="userInfo.username" placeholder="用户名" auto-complete="off" @keyup.enter.native="onSubmit"></el-input>
+            </el-form-item>
+            <el-form-item prop="password" label="密码">
+              <el-input type="password" v-model.trim="userInfo.password" auto-complete="off" placeholder="密码" @keyup.enter.native="onSubmit"></el-input>
+            </el-form-item>
+            <el-form-item v-if="enableValidCode" prop="validCode" label="验证码">
+              <el-col :span="16">
+                <el-input v-model.trim="userInfo.validCode" placeholder="验证码"></el-input>
+              </el-col>
+              <el-col :span="8">
+                <img @click="getValidCode" ref="validCodeImg" style="height:100%;" :src="validCodeUrl" />
+              </el-col>
+            </el-form-item>
+            <el-form-item>
+              <el-checkbox v-model="remember" label="记住密码"></el-checkbox>
+            </el-form-item>
+            <el-form-item>
+              <el-button style="width:100%;" type="primary" @click="onSubmit" :loading="loading">登录</el-button>
+            </el-form-item>
+          </el-form>
+        </el-card>
+      </transition>
     </el-col>
   </el-row>
 </template>
