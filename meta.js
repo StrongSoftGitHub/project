@@ -126,11 +126,30 @@ module.exports = {
 
         const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
 
-        const file = path.join(
+        const login = path.join(
+            data.inPlace ? '' : data.destDirName,
+            'src', 'components', 'login.vue'
+        )
+
+        fs.writeFile(login, template.PCLogin, err => {
+            if (err) throw err
+        })
+
+        const navMenu = path.join(
+            data.inPlace ? '' : data.destDirName,
+            'src', 'components', 'nav-menu.vue'
+        )
+
+        fs.writeFile(navMenu, template.navMenu, err => {
+            if (err) throw err
+        })
+
+        const navigation = path.join(
             data.inPlace ? '' : data.destDirName,
             'src', 'components', 'navigation.vue'
         )
-        fs.writeFile(file, template.navigation, err => {
+
+        fs.writeFile(navigation, template.navigation, err => {
             if (err) throw err
         })
 
