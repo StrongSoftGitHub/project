@@ -10,6 +10,8 @@ const {
 } = require('./utils')
 const pkg = require('./package.json')
 
+const { template } = require('./utils/template')
+
 const templateVersion = pkg.version
 
 const { addTestAnswers } = require('./scenarios')
@@ -25,9 +27,6 @@ module.exports = {
                 return options.fn(this)
             }
             return options.inverse(this)
-        },
-        render_raw(v1, options) {
-            return v1
         },
         template_version() {
             return templateVersion
@@ -126,6 +125,14 @@ module.exports = {
         sortDependencies(data, green)
 
         const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
+
+        const file = path.join(
+            data.inPlace ? '' : data.destDirName,
+            'src', 'components', 'navigation.vue'
+        )
+        fs.writeFile(file, template.navigation, err => {
+            if (err) throw err
+        })
 
         if (data.autoInstall) {
             installDependencies(cwd, data.autoInstall, green)
