@@ -2,18 +2,18 @@
 
 > 基于webpack模板改造，一个适合项目集成的脚手架。
 
-### 脚手架特点
+### 脚手架优化点
 
 1. 构建速度
 2. 首屏加载速度
 
 ### 功能
 
-1. 提供组件和插件的开发模板
-2. 内置Eslint代码规范检测
-3. 已设置好发布成npm包的配置
-4. 支持热刷新
-5. 代码错误检测
+1. 基础登录功能
+2. 动态路由生成
+3. 基础菜单
+4. 基础布局
+5. 模块配置注入机制
 
 ### 使用
 
@@ -23,64 +23,10 @@
 npm install -g vue-cli
 ```
 
-初始化开发脚手架：
+初始化项目脚手架：
 ``` bash
-vue init StrongSoftGitHub/simple-cli vue-component[或插件名称]
+vue init StrongSoftGitHub/project-cli my-project[格式：合同号+项目名称+cli，如综合信息平台：2017386-integrated-information-platform-cli）]
 ```
-
-### 开发步骤
-
-1. `vue init StrongSoftGitHub/simple-cli vue-component`，初始化开发脚手架， my-component即组件名称或者插件名称（*适用范围选项，选择通用会以@strongsoft作为前缀，选择项目，则会以@端口号作为前缀*）
-2. 开发好完成后，统一在src/lib/index.js文件中导出
-3. 在src/App.vue中编写示例
-4. 编写README.md（重要）
-3. `npm publish`，发布到npm包源
-
-### 代理设置
-
-在webpack.config.js文件中设置，如：
-```js
-devServer: {
-  proxy: {
-      '/api/**': {
-        target: 'http://47.95.14.230:9174',
-        secure: false
-      }
-  }
-}
-```
-
-### 组件安装使用
-
-1. 安装
-   - 通用组件：`npm install @strongsoft/my-component --save`
-   - 项目组件：`npm install @端口号/my-component --save`
-2. 使用
-   - 通用组件：`import MyComponent from '@strongsoft/my-component'`
-   - 项目组件：`import MyComponent from '@端口号/my-component'`
-
-### 插件安装使用
-
-1. 安装
-   - 通用插件：`npm install @strongsoft/my-plugin --save`
-   - 项目插件：`npm install @端口号/my-plugin --save`
-2. 使用
-   - 通用插件：
-     ```
-     import Vue from 'vue'
-     import MyPlugin from '@strongsoft/my-plugin'
-     Vue.use(MyPlugin)
-     //或者传入参数对象
-     Vue.use(MyPlugin,{})
-     ```
-   - 项目插件：
-     ```
-     import Vue from 'vue'
-     import MyPlugin from '@端口号/my-plugin'`
-     Vue.use(MyPlugin)
-     //或者传入参数对象
-     Vue.use(MyPlugin,{})
-     ```
 
 ### 常用命令
 
@@ -88,4 +34,3 @@ devServer: {
 - 启动本地服务器：npm run dev
 - 代码规范检测：npm run lint
 - 自动修复代码规范问题：npm run fix
-- 发布成npm包：npm publish
