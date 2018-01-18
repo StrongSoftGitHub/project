@@ -7,7 +7,7 @@
   "router": true,
   "lint": true,
   "lintConfig": "airbnb",
-  "unit": true,
+  "unit": false,
   "runner": "karma",
   "e2e": true,
   "autoInstall": false

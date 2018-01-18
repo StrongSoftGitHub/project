@@ -7,7 +7,7 @@
   "router": true,
   "lint": true,
   "lintConfig": "standard",
-  "unit": true,
+  "unit": false,
   "runner": "jest",
   "e2e": true,
   "autoInstall": false

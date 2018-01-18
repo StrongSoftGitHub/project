@@ -69,7 +69,7 @@ module.exports = {
             message: '是否使用ESLint规范您的代码?'
         },
         unit: {
-            when: 'isNotTest',
+            when: 'isNotTest && !name',
             type: 'confirm',
             message: '是否需要安装单元测试？',
             default: false
@@ -96,7 +96,7 @@ module.exports = {
             ],
         },
         e2e: {
-            when: 'isNotTest',
+            when: 'isNotTest && !name',
             type: 'confirm',
             message: '是否使用Nightwatch来进行e2e（端对端）测试？',
             default: false
@@ -127,15 +127,15 @@ module.exports = {
     filters: {
         '.eslintrc.js': 'lint',
         '.eslintignore': 'lint',
-        'config/test.env.js': 'unit || e2e',
-        'build/webpack.test.conf.js': "unit && runner === 'karma'",
-        'test/unit/**/*': 'unit',
-        'test/unit/index.js': "unit && runner === 'karma'",
-        'test/unit/jest.conf.js': "unit && runner === 'jest'",
-        'test/unit/karma.conf.js': "unit && runner === 'karma'",
-        'test/unit/specs/index.js': "unit && runner === 'karma'",
-        'test/unit/setup.js': "unit && runner === 'jest'",
-        'test/e2e/**/*': 'e2e'
+        'config/test.env.js': '0&&unit || 0&&e2e',
+        'build/webpack.test.conf.js': "0&&unit && runner === 'karma'",
+        'test/unit/**/*': '0&&unit',
+        'test/unit/index.js': "0&&unit && runner === 'karma'",
+        'test/unit/jest.conf.js': "0&&unit && runner === 'jest'",
+        'test/unit/karma.conf.js': "0&&unit && runner === 'karma'",
+        'test/unit/specs/index.js': "0&&unit && runner === 'karma'",
+        'test/unit/setup.js': "0&&unit && runner === 'jest'",
+        'test/e2e/**/*': '0&&e2e'
     },
     complete: function(data, { chalk }) {
         const green = chalk.green
