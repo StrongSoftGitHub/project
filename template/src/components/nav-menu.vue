@@ -1,16 +1,16 @@
 <template>
   <div class="nav-menu">
     <ul class="menu-ul">
-      <li class="fir-menu" v-for="firMenu in firLevelMenu" :style="style" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave" @click="handleMenuClick(firMenu,firMenu)" :class="{'active-fir-menu':activeFirMenu&&activeFirMenu.args===firMenu.args}">
+      <li class="fir-menu" v-for="firMenu in firLevelMenu" :key="firMenu.args" :style="style" @mouseenter="handleMouseenter" @mouseleave="handleMouseleave" @click="handleMenuClick(firMenu,firMenu)" :class="{'active-fir-menu':activeFirMenu&&activeFirMenu.args===firMenu.args}">
         <span class="fir-menu-name">{{firMenu.mname}}</span> <img v-if="firMenu.childMenu.length>0" class="arrow" src="static/nav_arrow_b_x.png" />
         <div class="menu-panel" v-if="firMenu.childMenu.length>0">
-          <div class="sub-panel" v-for="secMenu in firMenu.childMenu">
+          <div class="sub-panel" v-for="secMenu in firMenu.childMenu" :key="secMenu.args">
             <div class="sec-menu" @click="handleMenuClick(secMenu,firMenu,secMenu)">
               <div class="sec-menu-title" :class="{'active-sub-menu':activeSubMenu&&activeSubMenu.args===secMenu.args}" :data-end="secMenu.childMenu.length>0?0:1">
                 <span>{{secMenu.mname}}</span>
               </div>
               <div class="trd-panel" v-if="secMenu.childMenu.length>0">
-                <div class="trd-menu" v-for="trdMenu in secMenu.childMenu">
+                <div class="trd-menu" v-for="trdMenu in secMenu.childMenu" :key="trdMenu.args">
                   <span class="trd-menu-title" :class="{'active-sub-menu':activeSubMenu&&activeSubMenu.args===trdMenu.args}" @click="handleMenuClick(trdMenu,firMenu,trdMenu)">{{trdMenu.mname}}</span>
                 </div>
               </div>
@@ -35,7 +35,7 @@ export default {
       type: Object
     }
   },
-  data() {
+  data () {
     return {
       style: {
         width: '110px'
@@ -45,24 +45,24 @@ export default {
     }
   },
   computed: {
-    firLevelMenu() {
+    firLevelMenu () {
       return this.menuData.filter(item => item.level === 1)
     }
   },
-  created() {
+  created () {
     this.setActiveMenu()
   },
-  mounted() {
+  mounted () {
     this.style.width = (this.$el.offsetWidth - 30) / this.firLevelMenu.length + 'px'
     $(this.$el).find('.menu-panel').hide()
   },
   methods: {
-    handleMouseenter(e) {
+    handleMouseenter (e) {
       let firLevelMenuLi = $(e.currentTarget)
       firLevelMenuLi.find('.arrow').attr('src', 'static/nav_arrow_b_s.png')
       $(this.$el).find('.menu-panel').stop(true, false).animate({
         opacity: 0
-      }, function() {
+      }, function () {
         $(this).hide()
       })
       if (firLevelMenuLi.find('.menu-panel').length > 0) {
@@ -71,16 +71,16 @@ export default {
         })
       }
     },
-    handleMouseleave(e) {
+    handleMouseleave (e) {
       let firLevelMenuLi = $(e.currentTarget)
       firLevelMenuLi.find('.arrow').attr('src', 'static/nav_arrow_b_x.png')
       $(this.$el).find('.menu-panel').stop(true, false).animate({
         opacity: 0
-      }, function() {
+      }, function () {
         $(this).hide()
-      });
+      })
     },
-    handleMenuClick(menu, activeFirMenu, activeSubMenu) {
+    handleMenuClick (menu, activeFirMenu, activeSubMenu) {
       if (menu.childMenu.length === 0 || !menu.childMenu) {
         this.$router.push({ name: menu.args })
         this.activeFirMenu = activeFirMenu
@@ -88,7 +88,7 @@ export default {
         $(this.$el).find('.menu-panel').hide()
       }
     },
-    setActiveMenu() {
+    setActiveMenu () {
       if (this.$route) {
         let menu = this.$route.meta.menu
         this.activeFirMenu = this.findFirLevelMenu(menu)
@@ -103,7 +103,7 @@ export default {
         }
       }
     },
-    findFirLevelMenu(menu) {
+    findFirLevelMenu (menu) {
       if (menu.level === 1) {
         return menu
       }

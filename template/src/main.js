@@ -20,6 +20,8 @@ Vue.use($api, {
   apiConfig
 })
 
+Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
@@ -29,15 +31,15 @@ new Vue({
   store,
   components: { App },
   template: '<App/>',
-  created(){
-  	store.dispatch('global/loginByCookie').then(()=>{
-  		if(router.currentRoute.params.module){
-  			router.push({path:'/'+router.currentRoute.params.module})
-  		}else{
-        router.push({name:store.getters['global/firEndMenu'].args})
+  created () {
+    store.dispatch('global/loginByCookie').then(() => {
+      if (router.currentRoute.params.module) {
+        router.push({path: '/' + router.currentRoute.params.module})
+      } else {
+        router.push({name: store.getters['global/firEndMenu'].args})
       }
-  	}).catch(()=>{
-        router.push({name:'login'})
+    }).catch(() => {
+      router.push({name: 'login'})
     })
   }
 })

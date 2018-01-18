@@ -23,14 +23,14 @@ let router = new Router({
 router.beforeEach((to, from, next) => {
   NProgress.start()
   // 当前用户未登录时，访问非登录模块时
-  if (to.name !== 'login' && !store.getters['global/userInfo']) { 
+  if (to.name !== 'login' && !store.getters['global/userInfo']) {
     next({ name: 'login', params: { module: to.path.substr(1) } })
     NProgress.done()
   }
-  //访问登录模块时
-  if (to.name === 'login') { 
-  	//清空登录信息
-    store.commit('global/setUserInfo', null) 
+  // 访问登录模块时
+  if (to.name === 'login') {
+  // 清空登录信息
+    store.commit('global/setUserInfo', null)
   }
   next()
 })
@@ -45,7 +45,7 @@ store.registerModule('router', {
     router
   },
   mutations: {
-    addRoutes(state, routes) {
+    addRoutes (state, routes) {
       state.router.addRoutes(routes)
     }
   }

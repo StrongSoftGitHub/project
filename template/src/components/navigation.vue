@@ -6,8 +6,8 @@
         <nav-menu :menu-data="rawMenu" :first-end-menu="firEndMenu"></nav-menu>
       </div>
       <div class="login">
-        <span style="color:#fff">&nbsp;&nbsp;{{userInfo.realname}}</span>
-        <img src="static/login_out.png" @click="loginOut">
+        <span style="color:#fff">{{userInfo&&userInfo.realname||''}}&nbsp;&nbsp;</span>
+        <img src="static/login_out.png" @click="loginOutSystem">
       </div>
     </div>
   </transition>
@@ -32,7 +32,7 @@ export default {
     ...mapActions('global', [
       'loginOut'
     ]),
-    loginOut() {
+    loginOutSystem () {
       this.loginOut().then(() => {
         this.$router.push({ name: 'login' })
       })
