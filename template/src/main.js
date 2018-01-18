@@ -2,6 +2,9 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
+// Element-UI
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
 // 清除浏览器默认的样式
 import 'reset.css'
 // 全局状态管理器
@@ -25,5 +28,16 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  created(){
+  	store.dispatch('global/loginByCookie').then(()=>{
+  		if(router.currentRoute.params.module){
+  			router.push({path:'/'+router.currentRoute.params.module})
+  		}else{
+        router.push({name:store.getters['global/firEndMenu'].args})
+      }
+  	}).catch(()=>{
+        router.push({name:'login'})
+    })
+  }
 })

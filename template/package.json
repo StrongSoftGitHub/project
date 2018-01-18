@@ -28,9 +28,12 @@
     "build:dll": "webpack --config ./build/webpack.dll.conf.js"
   },
   "dependencies": {
+    "animate.css": "^3.5.2",
+    "element-ui": "^2.0.7",
     "@strongsoft/framework-core-vuex": "^1.0.0",
     "@strongsoft/vue-axios": "^1.0.0",
     "@strongsoft/vue-iframe": "^1.0.0",
+    "jquery": "^3.2.1",
     "reset.css": "^2.0.2",
     "vue": "^2.5.2",
     "vuex": "^3.0.1",
@@ -101,6 +104,8 @@
     "friendly-errors-webpack-plugin": "^1.6.1",
     "happypack": "^4.0.0",
     "html-webpack-plugin": "^2.30.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
     "webpack-bundle-analyzer": "^2.9.0",
     "node-notifier": "^5.1.2",
     "postcss-import": "^11.0.0",
