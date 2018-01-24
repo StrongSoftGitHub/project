@@ -15,7 +15,28 @@
 4. 基础布局
 5. 模块配置注入机制
 
-### 后端支持
+### 使用方法
+
+如果还没安装过vue-cli，请执行：
+
+``` bash
+npm install -g vue-cli
+```
+
+如果还设置NPM包源，请执行：
+
+``` bash
+npm set registry http://115.29.205.204:10001
+```
+
+初始化项目脚手架：
+``` bash
+vue init StrongSoftGitHub/project-cli my-project
+```
+my-project
+
+
+### 后端支撑
 
 1、通用接口：basic/data
 2、配置文件接口：basic/config
@@ -94,19 +115,6 @@
       ]]>
     </item>
   </mapping>
-```
-
-### 使用
-
-如果还没安装过vue-cli，请执行：
-
-``` bash
-npm install -g vue-cli
-```
-
-初始化项目脚手架：
-``` bash
-vue init StrongSoftGitHub/project-cli my-project[格式：合同号+项目名称+cli，如综合信息平台：2017386-integrated-information-platform-cli）]
 ```
 
 ### 常用命令

@@ -36,9 +36,9 @@ new Vue({
   created () {
     store.dispatch('global/loginByCookie').then(() => {
       if (router.currentRoute.params.module) {
-        router.push({path: '/' + router.currentRoute.params.module})
+        router.push({ path: '/' + router.currentRoute.params.module, query: router.currentRoute.query })
       } else {
-        router.push({name: store.getters['global/firEndMenu'].args})
+        router.push({ path: '/' + store.getters['global/firEndMenu'].navigateuri || store.getters['global/firEndMenu'].args })
       }
     }).catch(() => {
       router.push({name: 'login'})

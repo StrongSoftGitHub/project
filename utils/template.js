@@ -524,9 +524,9 @@ export default {
     },
     enterSystem () {
       if (this.$route.params.module) {
-        this.$router.push({ path: '/' + this.$route.params.module })
+        this.$router.push({ path: '/' + this.$route.params.module, query: this.$route.query })
       } else {
-        this.$router.push({ name: this.firEndMenu.args })
+        this.$router.push({ path: '/' + (this.firEndMenu.navigateuri || this.firEndMenu.args) })
       }
     }
   }
