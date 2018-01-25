@@ -1,6 +1,6 @@
 exports.template = {
     "navigation": `<template>
-  <transition appear enter-active-class="animated bounceInDown" leave-active-class="animated bounceOutUp">
+  <transition appear enter-active-class="animated bounceInDown">
     <div class="navigation">
       <div class="logo" style="background-image:url(static/top_log_new.png)"></div>
       <div class="menu">

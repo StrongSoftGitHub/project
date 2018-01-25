@@ -17,22 +17,31 @@
 
 ### 使用方法
 
-如果还没安装过vue-cli，请执行：
+1、如果还没安装过vue-cli，请执行：
 
 ``` bash
 npm install -g vue-cli
 ```
 
-如果还设置NPM包源，请执行：
+2、如果还设置NPM包源，请执行：
 
 ``` bash
 npm set registry http://115.29.205.204:10001
 ```
 
-初始化项目脚手架：
+3、初始化项目脚手架：
 ``` bash
 vue init StrongSoftGitHub/project-cli [脚手架名称，格式：合同号-项目名称-cli]
 ```
+
+4、在菜单表单里配置菜单
+
+5、安装菜单配置的组件```npm install [组件名] --save```，然后
+在/src/store/components.js文件中注册组件
+
+6、编译和发布
+执行命令：``` npm run build```编译
+发布：将编译生成的dist目录下的文件复制到服务器上即可运行。
 
 ### 后端支撑
 1、通用接口：basic/data
