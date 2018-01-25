@@ -1,6 +1,6 @@
 # project-cli
 
-> 基于webpack模板改造，一个适合项目集成的脚手架。
+> 基于webpack模板改造，一个集成登录、菜单、动态路由生成、模块配置注入等功能，适合集成各个模块的脚手架。
 
 ### 脚手架优化点
 
@@ -31,18 +31,15 @@ npm set registry http://115.29.205.204:10001
 
 初始化项目脚手架：
 ``` bash
-vue init StrongSoftGitHub/project-cli my-project
+vue init StrongSoftGitHub/project-cli [脚手架名称，格式：合同号-项目名称-cli]
 ```
-my-project
-
 
 ### 后端支撑
-
 1、通用接口：basic/data
 2、配置文件接口：basic/config
 3、key为s_user_validate的用户登录接口，如：
 ```
-<mapping name="s_user_validate" title="用户登录接口" remark="用户登录接口" author="wsn" target="4.0">
+<mapping name="s_user_validate" title="用户登录接口" remark="用户登录接口" author="strong" target="4.0">
     <schema>
       <item name="u_id" remark="主键ID"/>
       <item name="uname" remark="账号"/>
@@ -80,7 +77,7 @@ my-project
 ```
 4、key为select_sys_menu_list的菜单通用接口，如：
 ```
-<mapping name="select_sys_menu_list" title="获取菜单列表" remark="获取菜单列表" target="4.0" author="wsn">
+<mapping name="select_sys_menu_list" title="获取菜单列表" remark="获取菜单列表" target="4.0" author="strong">
     <item conn_name="Conn_Extend">
       <![CDATA[
        select
