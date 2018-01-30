@@ -1,17 +1,15 @@
 exports.template = {
     "navigation": `<template>
-  <transition appear enter-active-class="animated bounceInDown">
-    <div class="navigation">
-      <div class="logo" style="background-image:url(static/top_log_new.png)"></div>
-      <div class="menu">
-        <nav-menu :menu-data="rawMenu" :first-end-menu="firEndMenu"></nav-menu>
-      </div>
-      <div class="login">
-        <span style="color:#fff">{{ userInfo&&userInfo.realname||'' }}&nbsp;&nbsp;</span>
-        <img src="static/login_out.png" @click="loginOutSystem">
-      </div>
+  <div class="navigation">
+    <div class="logo" style="background-image:url(static/top_log_new.png)"></div>
+    <div class="menu">
+      <nav-menu :menu-data="rawMenu" :first-end-menu="firEndMenu"></nav-menu>
     </div>
-  </transition>
+    <div class="login">
+      <span style="color:#fff">{{ userInfo&&userInfo.realname||'' }}&nbsp;&nbsp;</span>
+      <img src="static/login_out.png" @click="loginOutSystem">
+    </div>
+  </div>
 </template>
 <script>
 import { mapGetters, mapActions } from 'vuex'
@@ -359,7 +357,7 @@ export default {
 "PCLogin":`<template>
   <el-row style="margin-top: 10%">
     <el-col :span="8" :offset="8">
-      <transition appear enter-active-class="animated bounceInDown" leave-active-class="animated bounceOutUp">
+      <transition appear enter-active-class="animated zoomInUp" leave-active-class="animated zoomOutDown">
         <el-card style="width: 450px;margin:0 auto">
           <el-form label-position="right" :rules="rules" label-width="70px" :model="userInfo" ref="loginForm">
             <el-form-item prop="username" label="用户名">
