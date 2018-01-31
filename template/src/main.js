@@ -34,14 +34,17 @@ new Vue({
   components: { App },
   template: '<App/>',
   created () {
+    const setLoadingState = () => {
+      store.commit('global/setLoadingState', false)
+    }
     store.dispatch('global/loginByCookie').then(() => {
       if (router.currentRoute.params.module) {
-        router.push({ path: '/' + router.currentRoute.params.module, query: router.currentRoute.query })
+        router.push({ path: '/' + router.currentRoute.params.module, query: router.currentRoute.query }, setLoadingState)
       } else {
-        router.push({ path: '/' + (store.getters['global/firEndMenu'].navigateuri || store.getters['global/firEndMenu'].args) })
+        router.push({ path: '/' + (store.getters['global/firEndMenu'].navigateuri || store.getters['global/firEndMenu'].args) }, setLoadingState)
       }
     }).catch(() => {
-      router.push({name: 'login'})
+      router.push({name: 'login'}, setLoadingState)
     })
   }
 })
