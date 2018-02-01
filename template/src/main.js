@@ -27,9 +27,9 @@ FastClick.attach(document.body)
 Vue.use($api, {
   apiConfig
 })
-
-{{#if_eq cliType "PC"}}Vue.use(ElementUI){{/if_eq}}
-
+{{#if_eq cliType "PC"}}
+Vue.use(ElementUI)
+{{/if_eq}}
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
