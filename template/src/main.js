@@ -28,7 +28,7 @@ Vue.use($api, {
   apiConfig
 })
 
-Vue.use(ElementUI)
+{{#if_eq cliType "PC"}}Vue.use(ElementUI){{/if_eq}}
 
 Vue.config.productionTip = false
 
