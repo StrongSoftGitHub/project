@@ -1,12 +1,12 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
-import App from './App'
+import App from './App'{{#if_eq cliType "PC"}}
 // Element-UI
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // 清除浏览器默认的样式
-import 'reset.css'
+import 'reset.css'{{/if_eq}}
 // 动画库
 import 'animate.css'
 // 全局状态管理器
@@ -20,6 +20,7 @@ import $api from '@strongsoft/vue-axios'
 {{#if_eq cliType "mobile"}}
 // 移除移动端点击延迟
 const FastClick = require('fastclick')
+
 FastClick.attach(document.body)
 {{/if_eq}}
 

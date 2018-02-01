@@ -50,13 +50,13 @@ module.exports = {
             message: "项目类型",
             default: 0,
             choices: [{
-                name: "PC端项目",
+                name: "PC端项目（默认集成element-ui）",
                 value: "PC",
-                short: "PC端项目"
+                short: "PC端项目（默认集成element-ui）"
             }, {
-                name: "移动端项目",
+                name: "移动端项目（默认集成vux）",
                 value: "mobile",
-                short: "移动端项目"
+                short: "移动端项目（默认集成vux）"
             }]
         },
         name: {
