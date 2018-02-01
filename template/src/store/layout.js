@@ -9,7 +9,7 @@ export default {
       overflow: 'hidden'
     },
     /* --------------------------根级容器End-------------------------- */
-
+    {{#if_eq cliType "PC"}}
     /* -------------------------顶部导航栏Begin------------------------- */
     topNavigation: { // 顶部导航栏
       top: 0,
@@ -20,9 +20,11 @@ export default {
       position: 'absolute'
     },
     /* -------------------------顶部导航栏Begin------------------------- */
+    {{/if_eq}}
 
     /* ------------------------中间内容主体Begin------------------------ */
     centerMain: { // 中间主体内容部分
+      {{#if_eq cliType "mobile"}}top: 0,{{/if_eq}}
       left: 0,
       right: 0,
       bottom: 0,
@@ -38,18 +40,18 @@ export default {
      */
     appStyle (state) {
       return [state.app]
-    },
+    },{{#if_eq cliType "PC"}}
     /**
      * [topNavigationStyle 返回顶部导航栏最终的样式]
      */
     topNavigationStyle (state) {
       return [state.topNavigation]
-    },
+    },{{/if_eq}}
     /**
      * [centerMainStyle 返回中间主体内容最终的样式]
      */
     centerMainStyle (state) {
-      return [state.centerMain, {top: state.topNavigation.height}]
+      return [state.centerMain{{#if_eq cliType "PC"}}, {top: state.topNavigation.height}{{/if_eq}}]
     }
   }
 }

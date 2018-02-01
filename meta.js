@@ -45,6 +45,20 @@ module.exports = {
         },
     },
     prompts: {
+        cliType: {
+            type: "list",
+            message: "项目类型",
+            default: 0,
+            choices: [{
+                name: "PC端项目",
+                value: "PC",
+                short: "PC端项目"
+            }, {
+                name: "移动端项目",
+                value: "mobile",
+                short: "移动端项目"
+            }]
+        },
         name: {
             when: 'isNotTest',
             type: 'string',
@@ -101,11 +115,11 @@ module.exports = {
             message: '是否使用Nightwatch来进行e2e（端对端）测试？',
             default: false
         },
-        api:{
+        api: {
             when: 'isNotTest',
             type: 'string',
             message: 'API接口地址（如：http://47.95.14.230:9174，默认：localhost）',
-            default:'localhost'
+            default: 'localhost'
         },
         autoInstall: {
             when: 'isNotTest',
@@ -125,6 +139,7 @@ module.exports = {
         }
     },
     filters: {
+        'src/components/navigation.vue': "cliType === 'PC'",
         '.eslintrc.js': 'lint',
         '.eslintignore': 'lint',
         'config/test.env.js': '0&&unit || 0&&e2e',
@@ -162,14 +177,16 @@ module.exports = {
             if (err) throw err
         })
 
-        const navigation = path.join(
-            data.inPlace ? '' : data.destDirName,
-            'src', 'components', 'navigation.vue'
-        )
+        if (data.cliType === 'PC') {
+            const navigation = path.join(
+                data.inPlace ? '' : data.destDirName,
+                'src', 'components', 'navigation.vue'
+            )
 
-        fs.writeFile(navigation, template.navigation, err => {
-            if (err) throw err
-        })
+            fs.writeFile(navigation, template.navigation, err => {
+                if (err) throw err
+            })
+        }
 
         if (data.autoInstall) {
 

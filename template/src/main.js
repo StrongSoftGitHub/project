@@ -17,6 +17,11 @@ import router from '@/router'
 import apiConfig from '@/api'
 // 接口请求工具
 import $api from '@strongsoft/vue-axios'
+{{#if_eq cliType "mobile"}}
+// 移除移动端点击延迟
+const FastClick = require('fastclick')
+FastClick.attach(document.body)
+{{/if_eq}}
 
 Vue.use($api, {
   apiConfig

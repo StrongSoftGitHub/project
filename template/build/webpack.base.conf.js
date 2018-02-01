@@ -8,6 +8,7 @@ const ExtractTextPlugin=require('extract-text-webpack-plugin')
 const os = require('os');
 const HappyPack  = require('happypack');
 const happThreadPool = HappyPack.ThreadPool({size: os.cpus().length}); // 采用多进程，进程数由CPU核数决定
+{{#if_eq cliType "mobile"}}const vuxLoader = require('vux-loader'){{/if_eq}}
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -24,7 +25,7 @@ function resolve (dir) {
   }
 }){{/lint}}
 
-module.exports = {
+const webpackConfig = {
   context: path.resolve(__dirname, '../'),
   entry: {
     app: './src/main.js'
@@ -115,3 +116,11 @@ module.exports = {
     child_process: 'empty'
   }
 }
+{{#if_eq cliType "PC"}}
+module.exports=webpackConfig
+{{/if_eq}}
+{{#if_eq cliType "mobile"}}
+module.exports = vuxLoader.merge(webpackConfig, {
+  plugins: ['vux-ui','duplicate-style']
+})
+{{/if_eq}}

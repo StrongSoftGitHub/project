@@ -5,30 +5,30 @@
 ## Build Setup
 
 ``` bash
-# install dependencies
+# 安装依赖
 npm install
 
-# serve with hot reload at localhost:8080
+# 本地运行
 npm run dev
 
-# build for production with minification
+# 编译
 npm run build
 
-# build for production and view the bundle analyzer report
+# 依赖分析
 npm run build --report
 {{#unit}}
 
-# run unit tests
+# 运行单元测试
 npm run unit
 {{/unit}}
 {{#e2e}}
 
-# run e2e tests
+# 运行端对端测试
 npm run e2e
 {{/e2e}}
 {{#if_or unit e2e}}
 
-# run all tests
+# 运行所有测试
 npm test
 {{/if_or}}
 ```
