@@ -28,6 +28,7 @@ Vue.use($api, {
   apiConfig
 })
 {{#if_eq cliType "PC"}}
+
 Vue.use(ElementUI)
 {{/if_eq}}
 
