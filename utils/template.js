@@ -154,7 +154,7 @@ export default {
       firLevelMenuLi.find('.arrow').attr('src', 'static/nav_arrow_b_x.png')
       $(this.$el).find('.menu-panel').stop(true, false).animate({
         opacity: 0
-      }, function () {
+      }, 'fast', function () {
         $(this).hide()
       })
     },

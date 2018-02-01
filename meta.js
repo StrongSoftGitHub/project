@@ -139,6 +139,10 @@ module.exports = {
         }
     },
     filters: {
+        'static/login_out.png': "cliType === 'PC'",
+        'static/nav_arrow_b_s.png': "cliType === 'PC'",
+        'static/nav_arrow_b_x.png': "cliType === 'PC'",
+        'static/top_log_new.png': "cliType === 'PC'",
         'src/components/navigation.vue': "cliType === 'PC'",
         '.eslintrc.js': 'lint',
         '.eslintignore': 'lint',

@@ -24,8 +24,8 @@ export default {
 
     /* ------------------------中间内容主体Begin------------------------ */
     centerMain: { // 中间主体内容部分
-      {{#if_eq cliType "mobile"}}top: 0,{{/if_eq}}
-      left: 0,
+      {{#if_eq cliType "mobile"}}top: 0,
+      {{/if_eq}}left: 0,
       right: 0,
       bottom: 0,
       overflow: 'visible',
