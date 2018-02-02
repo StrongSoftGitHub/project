@@ -195,7 +195,7 @@ module.exports = {
             })
         }
 
-        if (data.cliType === 'PC') {
+        if (data.cliType === 'mobile') {
             const login = path.join(
                 data.inPlace ? '' : data.destDirName,
                 'src', 'components', 'login.vue'
