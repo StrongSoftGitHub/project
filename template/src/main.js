@@ -46,11 +46,11 @@ new Vue({
       store.commit('global/setLoadingState', false)
     }
     store.dispatch('global/loginByCookie').then(() => {
-      if (router.currentRoute.params.module) {
+      {{#if_eq cliType "PC"}}if (router.currentRoute.params.module) {
         router.push({ path: '/' + router.currentRoute.params.module, query: router.currentRoute.query }, setLoadingState)
       } else {
         router.push({ path: '/' + (store.getters['global/firEndMenu'].navigateuri || store.getters['global/firEndMenu'].args) }, setLoadingState)
-      }
+      }{{/if_eq}}{{#if_eq cliType "mobile"}}router.push({name: 'menu'}, setLoadingState){{/if_eq}}
     }).catch(() => {
       router.push({name: 'login'}, setLoadingState)
     })

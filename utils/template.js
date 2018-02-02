@@ -637,7 +637,7 @@ export default {
       this.userInfo.password = accountInfo.password
     },
     enterSystem () {
-      this.$router.push({ name: 'login' })
+      this.$router.push({ name: 'menu' })
     }
   }
 }
