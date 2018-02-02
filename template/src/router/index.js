@@ -20,9 +20,9 @@ let router = new Router({
   }]
 })
 
-router.beforeEach((to, from, next) =>{ {{#if_eq cliType "PC"}}
-  NProgress.start(){{/if_eq}}
-  // 当前用户未登录时，访问非登录模块时
+router.beforeEach((to, from, next) => {
+  {{#if_eq cliType "PC"}}NProgress.start()
+  {{/if_eq}}// 当前用户未登录时，访问非登录模块时
   if (to.name !== 'login' && !store.getters['global/userInfo']) {
     next({ name: 'login', params: { module: to.path.substr(1) } }){{#if_eq cliType "PC"}}
     NProgress.done(){{/if_eq}}
