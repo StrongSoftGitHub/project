@@ -629,7 +629,7 @@ export default {
      * [loadAccount 加载用户信息]
      */
     loadAccount () {
-      if (this.cookie['accountInfo']) {
+      if (!this.cookie['accountInfo']) {
         return
       }
       let accountInfo = JSON.parse(unescape(this.cookie['accountInfo']))

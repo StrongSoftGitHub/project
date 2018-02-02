@@ -25,6 +25,9 @@ FastClick.attach(document.body)
 {{/if_eq}}
 
 Vue.use($api, {
+  {{#if_eq cliType "mobile"}}nprogressConfig: {
+    enable: false
+  },{{/if_eq}}
   apiConfig
 })
 {{#if_eq cliType "PC"}}
