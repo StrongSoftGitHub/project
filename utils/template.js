@@ -538,5 +538,152 @@ export default {
 }
 
 </style>
+`,
+"MobileLogin":`<template>
+  <div class="login" style="background-image: url(static/bj.png);">
+    <box gap="50% 30px">
+      <group>
+        <x-input title="账号" v-model.trim="userInfo.username" placeholder="请填写账号" auto-complete="off"></x-input>
+        <x-input title="密码" v-model.trim="userInfo.password" placeholder="请填写密码" type="password" auto-complete="off"></x-input>
+      </group>
+      <x-button type="primary" @click.native="onSubmit" style="margin-top:20px;border-radius: 10px" :show-loading="loading">登录</x-button>
+    </box>
+  </div>
+</template>
+<script>
+import Vue from 'vue'
+import { mapGetters, mapMutations, mapActions } from 'vuex'
+import { Box, Group, XInput, XButton, Toast, ToastPlugin } from 'vux'
+
+Vue.use(ToastPlugin)
+
+export default {
+  name: 'login',
+  components: {
+    Box,
+    Toast,
+    Group,
+    XInput,
+    XButton
+  },
+  data () {
+    return {
+      loading: false,
+      msgShow: false,
+      userInfo: {
+        username: '', // 用户名
+        password: '' // 登录密码
+      }
+    }
+  },
+  computed: {
+    ...mapGetters('global', [
+      'cookie',
+      'firEndMenu'
+    ])
+  },
+  mounted () {
+    this.loadAccount()
+  },
+  methods: {
+    ...mapMutations('global', [
+      'setCookie'
+    ]),
+    ...mapActions('global', [
+      'loginByUserName'
+    ]),
+    valid () {
+      return new Promise((resolve, reject) => {
+        if (!this.userInfo.username) {
+          return reject(new Error('请填写账号！'))
+        }
+        if (!this.userInfo.password) {
+          return reject(new Error('请填写密码！'))
+        }
+        resolve()
+      })
+    },
+    onSubmit () {
+      this.valid().then(() => {
+        this.loading = true
+        this.loginByUserName(this.userInfo).then(resp => {
+          this.loading = false // 登录成功
+          this.rememberAccount()
+          this.enterSystem()
+        }).catch(() => {
+          this.loading = false
+          this.$vux.toast.text('账号或密码错误！', 'top') // 登录失败
+        })
+      }).catch(err => {
+        this.$vux.toast.text(err.message, 'top')
+      })
+    },
+    /**
+     * [rememberAccount 记住密码]
+     */
+    rememberAccount () {
+      this.setCookie({ name: 'rememberAccount', value: 1 })
+      this.setCookie({ name: 'accountInfo', value: escape(JSON.stringify(this.userInfo)) })
+    },
+    /**
+     * [loadAccount 加载用户信息]
+     */
+    loadAccount () {
+      if (this.cookie['accountInfo']) {
+        return
+      }
+      let accountInfo = JSON.parse(unescape(this.cookie['accountInfo']))
+      this.userInfo.username = accountInfo.username
+      this.userInfo.password = accountInfo.password
+    },
+    enterSystem () {
+      this.$router.push({ name: 'login' })
+    }
+  }
+}
+
+</script>
+<style>
+.login .weui-cells {
+  border-radius: 10px;
+}
+
+.login .weui-input {
+  font-size: 15px !important;
+  margin-left: 11px;
+  margin-bottom: 5px;
+}
+
+.login .weui-label {
+  font-size: 15px;
+}
+
+</style>
+<style scoped lang="less">
+.login {
+  font-size: 20px;
+  font-family: 微软雅黑;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100%;
+  background-size: 100%;
+  background-position: center;
+  text-align: center;
+
+  .weui-btn_primary {
+    background-color: #5DE469;
+  }
+
+  .vux-x-input.weui-cell {
+    border-bottom-color: #ccc;
+    border-width: 0 0 1px 0;
+    border-style: solid;
+  }
+}
+
+</style>
 `
 }
