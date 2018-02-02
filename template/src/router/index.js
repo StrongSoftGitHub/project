@@ -33,8 +33,8 @@ router.beforeEach((to, from, next) => {
     store.commit('global/setUserInfo', null)
   }
   next()
-})
-{{#if_eq cliType "PC"}}
+}){{#if_eq cliType "PC"}}
+
 router.afterEach(() => {
   NProgress.done()
 }){{/if_eq}}
