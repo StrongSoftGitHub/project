@@ -43,6 +43,12 @@ vue init StrongSoftGitHub/project-cli [脚手架名称，格式：合同号-项�
 执行命令：``` npm run build```编译
 发布：将编译生成的dist目录下的文件复制到服务器上即可运行。
 
+### 可视化分析构建结果
+
+方式一：npm run report
+
+方式二：npm run dev后，访问localhost:1337
+
 ### 后端支撑
 1、通用接口：basic/data
 2、配置文件接口：basic/config

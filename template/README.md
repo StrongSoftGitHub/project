@@ -14,8 +14,11 @@ npm run dev
 # 编译
 npm run build
 
-# 依赖分析
-npm run build --report
+### 可视化分析构建结果
+
+方式一：npm run report
+
+方式二：npm run dev后，访问localhost:1337
 {{#unit}}
 
 # 运行单元测试
