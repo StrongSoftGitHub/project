@@ -63,7 +63,7 @@ module.exports = {
             when: 'isNotTest',
             type: 'string',
             required: true,
-            message: '项目名称（合同号+项目名称+cli，如综合信息平台：2017386-integrated-information-platform-cli）',
+            message: '项目名称（合同号+项目名称，如综合信息平台：2017386-integrated-information-platform）',
         },
         description: {
             when: 'isNotTest',
@@ -143,6 +143,8 @@ module.exports = {
         'static/nav_arrow_b_s.png': "cliType === 'PC'",
         'static/nav_arrow_b_x.png': "cliType === 'PC'",
         'static/top_log_new.png': "cliType === 'PC'",
+        'static/bj.png': "cliType === 'mobile'",
+        'src/components/menu.vue': "cliType === 'mobile'",
         'src/components/nav-menu.vue': "cliType === 'PC'",
         'src/components/navigation.vue': "cliType === 'PC'",
         '.eslintrc.js': 'lint',
@@ -164,31 +166,51 @@ module.exports = {
 
         const cwd = path.join(process.cwd(), data.inPlace ? '' : data.destDirName)
 
-        const login = path.join(
-            data.inPlace ? '' : data.destDirName,
-            'src', 'components', 'login.vue'
-        )
-
-        fs.writeFile(login, template.PCLogin, err => {
-            if (err) throw err
-        })
-
-        const navMenu = path.join(
-            data.inPlace ? '' : data.destDirName,
-            'src', 'components', 'nav-menu.vue'
-        )
-
-        fs.writeFile(navMenu, template.navMenu, err => {
-            if (err) throw err
-        })
-
         if (data.cliType === 'PC') {
+            const login = path.join(
+                data.inPlace ? '' : data.destDirName,
+                'src', 'components', 'login.vue'
+            )
+
+            fs.writeFile(login, template.PCLogin, err => {
+                if (err) throw err
+            })
+
+            const navMenu = path.join(
+                data.inPlace ? '' : data.destDirName,
+                'src', 'components', 'nav-menu.vue'
+            )
+
+            fs.writeFile(navMenu, template.navMenu, err => {
+                if (err) throw err
+            })
+
             const navigation = path.join(
                 data.inPlace ? '' : data.destDirName,
                 'src', 'components', 'navigation.vue'
             )
 
             fs.writeFile(navigation, template.navigation, err => {
+                if (err) throw err
+            })
+        }
+
+        if (data.cliType === 'PC') {
+            const login = path.join(
+                data.inPlace ? '' : data.destDirName,
+                'src', 'components', 'login.vue'
+            )
+
+            fs.writeFile(login, template.MobileLogin, err => {
+                if (err) throw err
+            })
+
+            const menu = path.join(
+                data.inPlace ? '' : data.destDirName,
+                'src', 'components', 'menu.vue'
+            )
+
+            fs.writeFile(menu, template.menu, err => {
                 if (err) throw err
             })
         }
