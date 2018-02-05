@@ -205,6 +205,15 @@ module.exports = {
             fs.writeFile(login, template.MobileLogin, err => {
                 if (err) throw err
             })
+
+            const menuGrid = path.join(
+                data.inPlace ? '' : data.destDirName,
+                'src', 'components', 'menu-grid.vue'
+            )
+
+            fs.writeFile(menuGrid, template.menuGrid, err => {
+                if (err) throw err
+            })
         }
 
         if (data.autoInstall) {
