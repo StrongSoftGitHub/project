@@ -5,7 +5,6 @@
   "author": "{{ author }}",
   "private": true,
   "scripts": {
-    "predev":"npm run build:dll",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     {{#if_eq runner "jest"}}
     "unit": "jest --config test/unit/jest.conf.js --coverage",

@@ -65,6 +65,13 @@ exports.runDev = function runLintFix(cwd, data, color) {
     })
 }
 
+exports.buildDll = function runLintFix(cwd, data, color) {
+    const args = ['run', 'build:dll']
+    return runCommand(data.autoInstall, args, {
+        cwd,
+    })
+}
+
 /**
  * Prints the final message with instructions of necessary next steps.
  * @param {Object} data Data from questionnaire.

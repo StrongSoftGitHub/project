@@ -6,6 +6,7 @@ const {
     installDependencies,
     runLintFix,
     runDev,
+    buildDll,
     printMessage,
 } = require('./utils')
 const pkg = require('./package.json')
@@ -220,6 +221,9 @@ module.exports = {
             console.log(chalk.yellow('Message:'), '安装过程大概需要4~5分钟，请耐心等候...')
 
             installDependencies(cwd, data.autoInstall, green)
+                .then(()=>{
+                    return buildDll(cwd, data, green)
+                })
                 .then(() => {
                     return runDev(cwd, data, green)
                 })
