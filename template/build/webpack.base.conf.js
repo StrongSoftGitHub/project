@@ -6,11 +6,11 @@ const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const ExtractTextPlugin=require('extract-text-webpack-plugin')
 const os = require('os')
-const Jarvis = require("webpack-jarvis")
 const HappyPack  = require('happypack')
 const happThreadPool = HappyPack.ThreadPool({size: os.cpus().length}) // 采用多进程，进程数由CPU核数决定
 {{#if_eq cliType "mobile"}}const vuxLoader = require('vux-loader')
 {{/if_eq}}
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -102,9 +102,6 @@ const webpackConfig = {
       id: 'js',
       loaders: ['babel-loader?cacheDirectory=true'],
       threadPool: happThreadPool
-    }),
-    new Jarvis({
-      port: 1337
     })
   ],
   node: {
