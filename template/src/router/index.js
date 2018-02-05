@@ -3,7 +3,8 @@ import store from '@/store'
 import Router from 'vue-router'{{#if_eq cliType "PC"}}
 import 'nprogress/nprogress.css'
 import NProgress from 'nprogress'{{/if_eq}}
-import Login from '@/components/login'
+import Login from '@/components/login'{{#if_eq cliType "mobile"}}
+import MenuGrid from '@/components/menu-grid'{{/if_eq}}
 
 Vue.use(Router)
 
@@ -17,7 +18,11 @@ let router = new Router({
     components: {
       login: Login
     }
-  }]
+  }{{#if_eq cliType "mobile"}}, {
+    path: '/menu',
+    name: 'menu',
+    component: MenuGrid
+  }{{/if_eq}}]
 })
 
 router.beforeEach((to, from, next) => {

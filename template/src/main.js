@@ -55,7 +55,7 @@ new Vue({
         router.push({ path: '/' + (store.getters['global/firEndMenu'].navigateuri || store.getters['global/firEndMenu'].args) }, setLoadingState)
       }{{/if_eq}}{{#if_eq cliType "mobile"}}router.push({name: 'menu'}, setLoadingState){{/if_eq}}
     }).catch(() => {
-      router.push({name: 'login'}, setLoadingState)
+      router.push({name: 'login'}, setLoadingState, setLoadingState)
     })
   }
 })

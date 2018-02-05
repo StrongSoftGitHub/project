@@ -145,7 +145,7 @@ module.exports = {
         'static/nav_arrow_b_x.png': "cliType === 'PC'",
         'static/top_log_new.png': "cliType === 'PC'",
         'static/bj.png': "cliType === 'mobile'",
-        'src/components/menu.vue': "cliType === 'mobile'",
+        'src/components/menu-grid.vue': "cliType === 'mobile'",
         'src/components/nav-menu.vue': "cliType === 'PC'",
         'src/components/navigation.vue': "cliType === 'PC'",
         '.eslintrc.js': 'lint',
