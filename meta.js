@@ -205,15 +205,6 @@ module.exports = {
             fs.writeFile(login, template.MobileLogin, err => {
                 if (err) throw err
             })
-
-            const menu = path.join(
-                data.inPlace ? '' : data.destDirName,
-                'src', 'components', 'menu.vue'
-            )
-
-            fs.writeFile(menu, template.menu, err => {
-                if (err) throw err
-            })
         }
 
         if (data.autoInstall) {
