@@ -6,6 +6,9 @@
 
 1. 构建速度
 2. 首屏加载速度
+3. 整合了PC端和移动端脚手架
+
+*如果移动端不需要走登录逻辑，建议直接用vux官方提供的脚手架，使用方法：vue init airyland/vux2 my-project*
 
 ### 功能
 
@@ -51,7 +54,9 @@ npm run report
 
 ### 后端支撑
 1、通用接口：basic/data
+
 2、配置文件接口：basic/config
+
 3、key为s_user_validate的用户登录接口，如：
 ```
 <mapping name="s_user_validate" title="用户登录接口" remark="用户登录接口" author="strong" target="4.0">
