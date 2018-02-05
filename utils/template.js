@@ -541,13 +541,15 @@ export default {
 `,
 "MobileLogin":`<template>
   <div class="login" style="background-image: url(static/bj.png);">
-    <box gap="50% 30px">
-      <group>
-        <x-input title="账号" v-model.trim="userInfo.username" placeholder="请填写账号" auto-complete="off"></x-input>
-        <x-input title="密码" v-model.trim="userInfo.password" placeholder="请填写密码" type="password" auto-complete="off"></x-input>
-      </group>
-      <x-button type="primary" @click.native="onSubmit" style="margin-top:20px;border-radius: 10px" :show-loading="loading">登录</x-button>
-    </box>
+    <transition appear enter-active-class="animated zoomInUp">
+      <box gap="50% 30px">
+        <group>
+          <x-input title="账号" v-model.trim="userInfo.username" placeholder="请填写账号" auto-complete="off"></x-input>
+          <x-input title="密码" v-model.trim="userInfo.password" placeholder="请填写密码" type="password" auto-complete="off"></x-input>
+        </group>
+        <x-button type="primary" @click.native="onSubmit" style="margin-top:20px;border-radius: 10px" :show-loading="loading">登录</x-button>
+      </box>
+    </transition>
   </div>
 </template>
 <script>
@@ -688,7 +690,7 @@ export default {
 `,
 "menuGrid":`<template>
   <div class="menu-grid" style="background-image: url(static/bj.png);">
-    <div class="menu-item" v-for="(menu,index) in menuData" :key="index" @click="handleMenuClick(menu)">{{menu.mname}}</div>
+    <div class="menu-item" v-for="(menu,index) in rawMenu" :key="index" @click="handleMenuClick(menu)">{{menu.mname}}</div>
   </div>
 </template>
 <script>
@@ -717,6 +719,7 @@ export default {
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: auto;
   padding-top: 100px;
   background-size: 100%;
   background-position: center;

@@ -11,14 +11,14 @@
       </div>
       <!-- 页面中间主体 -->
       <div :style="centerMainStyle">
-        <transition enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOutLeftBig" mode="out-in" :duration="{leave:300}">
+        <transition appear enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOutLeftBig" mode="out-in" :duration="{leave:300}">
           <router-view :key="$route.path"></router-view>
         </transition>
       </div>
       {{/if_eq}}
       {{#if_eq cliType "mobile"}}
       <div :style="centerMainStyle">
-        <transition enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOutLeftBig" mode="out-in" :duration="{leave:300}">
+        <transition appear enter-active-class="animated fadeInLeftBig" leave-active-class="animated fadeOutLeftBig" mode="out-in" :duration="{leave:300}">
           <router-view :key="$route.path"></router-view>
         </transition>
       </div>
